@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import classes from './event-item.module.css';
 
 const EventItem = (props) => {
   const humanReadableDate = new Date(props.date).toLocaleDateString('en-US', {
@@ -12,19 +13,19 @@ const EventItem = (props) => {
   const exploreLink = `/events/${props.id}`;
 
   return (
-    <li>
+    <li className={classes.item}>
       <img src={'/' + props.image} alt={props.title} />
-      <div>
-        <div>
+      <div className={classes.content}>
+        <div className={classes.summary}>
           <h2>{props.title}</h2>
-          <div>
+          <div className={classes.date}>
             <time>{humanReadableDate}</time>
           </div>
-          <div>
+          <div className={classes.address}>
             <address>{formattedAddress}</address>
           </div>
         </div>
-        <div>
+        <div className={classes.actions}>
           <Link href={exploreLink}>Explore Event</Link>
         </div>
       </div>
