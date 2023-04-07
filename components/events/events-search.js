@@ -4,12 +4,22 @@ import Button from '../ui/button';
 import Link from 'next/link';
 
 const EventsSearch = (props) => {
+  const yearInputRef = React.useRef();
+  const monthInputRef = React.useRef();
+
+  function submitHandler(event) {
+    event.preventDefault();
+    const selectedYear = yearInputRef.current.value;
+    const selectedMonth = monthInputRef.current.value;
+    props.onSearch(selectedYear, selectedMonth);
+  }
+
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.controls}>
         <div className={classes.control}>
           <label htmlFor='year'>Year</label>
-          <select id='year'>
+          <select id='year' ref={yearInputRef}>
             <option value='2021'>2021</option>
             <option value='2022'>2022</option>
           </select>
@@ -18,7 +28,7 @@ const EventsSearch = (props) => {
       <div className={classes.controls}>
         <div className={classes.control}>
           <label htmlFor='month'>Month</label>
-          <select id='month'>
+          <select id='month' ref={monthInputRef}>
             <option value='1'>January</option>
             <option value='2'>February</option>
             <option value='3'>March</option>
@@ -34,9 +44,7 @@ const EventsSearch = (props) => {
           </select>
         </div>
       </div>
-      <Button>
-        <Link href='/events'>Find Events</Link>
-      </Button>
+      <Button type='submit'>Find Events</Button>
     </form>
   );
 };
