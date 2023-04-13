@@ -11,10 +11,10 @@ async function handler(req, res) {
 
     // Store it in a database
     const client = await MongoClient.connect(
-      'mongodb+srv://jeandrev14:Password21@cluster-nextjs.0z2aj6o.mongodb.net/newsletter?retryWrites=true&w=majority'
+      'mongodb+srv://jeandrev14:Password21@cluster-nextjs.0z2aj6o.mongodb.net/events?retryWrites=true&w=majority'
     );
     const db = client.db();
-    const newsletterCollection = db.collection('emails');
+    const newsletterCollection = db.collection('newsletter');
     await newsletterCollection.insertOne({ email: userEmail });
 
     client.close();
